@@ -1,9 +1,7 @@
 package com.example.test;
 
-import com.example.Facade.AccountantWork;
-import com.example.Facade.PrimaryAccountingWork;
-import com.example.Facade.SalaryCalculatingWork;
-import com.example.Facade.TaxReportsPreparationWork;
+import com.example.command.*;
+import com.example.facade.AccountantWork;
 import com.example.singleton.*;
 import com.example.adapter.*;
 
@@ -48,8 +46,8 @@ public class Runner {
         Outlet220V outlet220V = new Outlet220V();
         outlet220V.supplyAC(new ChargeAdapter(smartphone));
 
-        //Facade testing
-        System.out.println("\n3. Facade testing...");
+        //facade testing
+        System.out.println("\n3. facade testing...");
         //Бухгалтер отмечает, что:
         //выполнил ведение первичного учёта,
         //выполнил начисление зарплаты,
@@ -64,6 +62,15 @@ public class Runner {
         //Бухгалтер отмечает, что выполнил свою работу
         AccountantWork accountantWork = new AccountantWork();
         accountantWork.isDone(true);
+
+        //Command testing
+        System.out.println("\n4. command testing...");
+        Maven maven = new Maven();
+        Programmer programmer = new Programmer(new CleanCommand(maven),
+                new BuildCommand(maven), new TomcatRunCommand(maven));
+        programmer.mvnClean();
+        programmer.mvnBuild();
+        programmer.mvnTomcatRun();
 
         System.out.println("\nFinish");
     }

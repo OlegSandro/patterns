@@ -1,4 +1,4 @@
-package com.example.Facade;
+package com.example.facade;
 
 public class SalaryCalculatingWork {
 
