@@ -1,5 +1,9 @@
 package com.example.test;
 
+import com.example.Facade.AccountantWork;
+import com.example.Facade.PrimaryAccountingWork;
+import com.example.Facade.SalaryCalculatingWork;
+import com.example.Facade.TaxReportsPreparationWork;
 import com.example.singleton.*;
 import com.example.adapter.*;
 
@@ -12,7 +16,9 @@ public class Runner {
         //Singletone testing
         System.out.println("\n1. Singletone testing...");
         Earth planet1 = Earth.getInstance();
+        System.out.println("Первый объект класса Planet создан. Его текстовое представление - " + planet1);
         Earth planet2 = Earth.getInstance();
+        System.out.println("Второй объект класса Planet создан. Его текстовое представление - " + planet2);
         if(planet1 == planet2){
             System.out.println("Объект planet1 (" + planet1 + ") является объектом planet2 (" + planet2 + ")");
         }else{
@@ -22,26 +28,43 @@ public class Runner {
         //Adapter testing
         System.out.println("\n2. Adapter testing...");
         //Потребителя переменного тока удаётся подключить к источнику переменного тока
-        //Лампу (электрическое устройство удаётся подключить к розетке)
+        //т.е. лампу (электрическое устройство) удаётся подключить к розетке
         /*AC ac = new AC(new Float(220), new Float(0.3), new Integer(60));
         Lamp lamp = new Lamp(ac);
         Outlet220V outlet220V = new Outlet220V();
         outlet220V.supplyAC(lamp);*/
 
         //Потребителя постоянного тока не удаётся подключить к источнику переменного тока
-        //Смартфон (электронное устройство) не удаётся подключить к розетке
+        //т.е. смартфон (электронное устройство) не удаётся подключить к розетке
         /*DC dc = new DC(new Float(5), new Float(1.55));
         Smartphone smartphone = new Smartphone(dc);
         Outlet220V outlet220V = new Outlet220V();
         outlet220V.supplyAC(smartphone);*/
 
         //Потребителя постоянного тока удаётся подключить к источнику переменного тока благодаря адаптеру
-        //Смартфон (электронное устройство) удаётся подключить к розетке
+        //т.е. смартфон (электронное устройство) удаётся подключить к розетке посредством адаптера
         DC dc = new DC(new Float(5), new Float(1.55));
         Smartphone smartphone = new Smartphone(dc);
         Outlet220V outlet220V = new Outlet220V();
         outlet220V.supplyAC(new ChargeAdapter(smartphone));
 
-        System.out.println("Finish");
+        //Facade testing
+        System.out.println("\n3. Facade testing...");
+        //Бухгалтер отмечает, что:
+        //выполнил ведение первичного учёта,
+        //выполнил начисление зарплаты,
+        //выполнил подготовку налоговой ведомости
+        /*PrimaryAccountingWork primaryAccountingWork = new PrimaryAccountingWork();
+        primaryAccountingWork.isKept(true);
+        SalaryCalculatingWork salaryCalculatingWork = new SalaryCalculatingWork();
+        salaryCalculatingWork.isCalculated(true);
+        TaxReportsPreparationWork taxReportsPreparationWork = new TaxReportsPreparationWork();
+        taxReportsPreparationWork.isPrepared(true);*/
+
+        //Бухгалтер отмечает, что выполнил свою работу
+        AccountantWork accountantWork = new AccountantWork();
+        accountantWork.isDone(true);
+
+        System.out.println("\nFinish");
     }
 }
