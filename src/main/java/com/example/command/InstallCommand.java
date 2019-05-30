@@ -1,14 +1,14 @@
 package com.example.command;
 
-public class BuildCommand implements Command {
+public class InstallCommand implements Command {
 
     Maven maven;
 
-    public BuildCommand(Maven maven) {
+    public InstallCommand(Maven maven) {
         this.maven = maven;
     }
 
     public void execute() {
-        maven.build();
+        maven.install();
     }
 }

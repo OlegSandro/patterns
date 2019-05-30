@@ -1,7 +1,8 @@
 package com.example.test;
 
 import com.example.command.*;
-import com.example.facade.AccountantWork;
+import com.example.facade.*;
+import com.example.factorymethod.*;
 import com.example.singleton.*;
 import com.example.adapter.*;
 
@@ -47,7 +48,7 @@ public class Runner {
         outlet220V.supplyAC(new ChargeAdapter(smartphone));
 
         //facade testing
-        System.out.println("\n3. facade testing...");
+        System.out.println("\n3. Facade testing...");
         //Бухгалтер отмечает, что:
         //выполнил ведение первичного учёта,
         //выполнил начисление зарплаты,
@@ -64,14 +65,21 @@ public class Runner {
         accountantWork.isDone(true);
 
         //Command testing
-        System.out.println("\n4. command testing...");
+        System.out.println("\n4. Command testing...");
         Maven maven = new Maven();
         Programmer programmer = new Programmer(new CleanCommand(maven),
-                new BuildCommand(maven), new TomcatRunCommand(maven));
+                new InstallCommand(maven), new TomcatRunCommand(maven));
         programmer.mvnClean();
         programmer.mvnBuild();
         programmer.mvnTomcatRun();
 
+        //Singletone testing
+        System.out.println("\n5. Factory Method testing...");
+        GameGenerator generator = new HardLevelGameGenerator(); /*new EasyLevelGameGenerator();*/
+        Game game = generator.createGame();
+        game.run();
+
         System.out.println("\nFinish");
+
     }
 }

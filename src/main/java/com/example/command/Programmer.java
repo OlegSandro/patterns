@@ -3,12 +3,12 @@ package com.example.command;
 public class Programmer {
 
     CleanCommand clean;
-    BuildCommand build;
+    InstallCommand install;
     TomcatRunCommand tomcatRun;
 
-    public Programmer(CleanCommand cleanCommand, BuildCommand buildCommand, TomcatRunCommand tomcatRunCommand) {
+    public Programmer(CleanCommand cleanCommand, InstallCommand installCommand, TomcatRunCommand tomcatRunCommand) {
         this.clean = cleanCommand;
-        this.build = buildCommand;
+        this.install = installCommand;
         this.tomcatRun = tomcatRunCommand;
     }
 
@@ -17,7 +17,7 @@ public class Programmer {
     }
 
     public void mvnBuild(){
-        build.execute();
+        install.execute();
     }
 
     public void mvnTomcatRun(){

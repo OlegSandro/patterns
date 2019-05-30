@@ -6,8 +6,8 @@ public class Maven {
         System.out.println("mvn clean");
     }
 
-    public void build(){
-        System.out.println("mvn build");
+    public void install(){
+        System.out.println("mvn install");
     }
 
     public void tomcatRun(){

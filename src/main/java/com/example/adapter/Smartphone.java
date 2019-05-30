@@ -9,6 +9,6 @@ public class Smartphone implements ElectronicDevice {
     }
 
     public void connectToDC() {
-        System.out.println("Смартфон: получаю переменный ток");
+        System.out.println("Смартфон: получаю постоянный ток");
     }
 }
