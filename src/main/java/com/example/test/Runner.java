@@ -1,12 +1,9 @@
 package com.example.test;
 
+import com.example.builder.*;
 import com.example.command.*;
-import com.example.decorator.EmailService;
-import com.example.decorator.EmailServiceImpl;
-import com.example.decorator.EmailServiceImplWithSignatureFunction;
-import com.example.delegate.Barman;
-import com.example.delegate.Cook;
-import com.example.delegate.Waiter;
+import com.example.decorator.*;
+import com.example.delegate.*;
 import com.example.facade.*;
 import com.example.factorymethod.*;
 import com.example.singleton.*;
@@ -110,7 +107,21 @@ public class Runner {
         EmailService emailServiceNew = new EmailServiceImplWithSignatureFunction(emailService); // вызываем обёртку сервиса
         emailServiceNew.sendLetter(); // отправляем письмо (теперь оно с добавленной подписью)
 
-        System.out.println("\nFinish");
+        //Delegate testing
+        System.out.println("\n8. Builder testing...");
 
+        /*
+        User user = new User();
+        user.setFileBuilder(new XmlFileBuilder());
+        user.constructFile();
+        System.out.println(user.getFile().toString());
+         */
+
+        User user = new User(); // создаём того, кто будет использовать строителя
+        user.setFileBuilder(new JspFileBuilder()); // передаём ему объект строителя
+        user.constructFile(); // строим новый файл
+        System.out.println(user.getFile().toString()); //смотрим данные построенного файла
+
+        System.out.println("\nFinish");
     }
 }
