@@ -1,6 +1,9 @@
 package com.example.test;
 
 import com.example.command.*;
+import com.example.delegate.Barman;
+import com.example.delegate.Cook;
+import com.example.delegate.Waiter;
 import com.example.facade.*;
 import com.example.factorymethod.*;
 import com.example.singleton.*;
@@ -73,11 +76,18 @@ public class Runner {
         programmer.mvnBuild();
         programmer.mvnTomcatRun();
 
-        //Singletone testing
+        //Factory Method testing
         System.out.println("\n5. Factory Method testing...");
         GameGenerator generator = new HardLevelGameGenerator(); /*new EasyLevelGameGenerator();*/
         Game game = generator.createGame();
         game.run();
+
+        //Delegate testing
+        System.out.println("\n6. Delegate testing...");
+        Waiter waiter = new Waiter(); //создаём официанта
+        //waiter.setDishMaker(new Barman()); // официант передаёт заказ бармену и получает выпивку для посетителя
+        waiter.setDishMaker(new Cook()); // официант передаёт заказ повару и получает еду для посетителя
+        waiter.provideDish(); // официант обеспечивает посетителя позицией из меню
 
         System.out.println("\nFinish");
 
