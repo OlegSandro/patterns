@@ -6,6 +6,7 @@ import com.example.decorator.*;
 import com.example.delegate.*;
 import com.example.facade.*;
 import com.example.factorymethod.*;
+import com.example.observer.*;
 import com.example.singleton.*;
 import com.example.adapter.*;
 
@@ -121,6 +122,12 @@ public class Runner {
         user.setFileBuilder(new JspFileBuilder()); // передаём ему объект строителя
         user.constructFile(); // строим новый файл
         System.out.println(user.getFile().toString()); //смотрим данные построенного файла
+
+        //Observer testing
+        System.out.println("\n8. Observer testing...");
+        Subscribed subscribed = new Subscribed(); // создали того, за кем будет следить наблюдатель
+        subscribed.addObserver(new Subscriber()); // создали наблюдателя
+        subscribed.setStatus("Уехал на дачу"); // наблюдаемый изменил свой статус в соцсети - наблюдателю отобразаться эти изменения
 
         System.out.println("\nFinish");
     }
