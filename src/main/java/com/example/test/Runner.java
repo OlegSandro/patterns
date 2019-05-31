@@ -1,6 +1,9 @@
 package com.example.test;
 
 import com.example.command.*;
+import com.example.decorator.EmailService;
+import com.example.decorator.EmailServiceImpl;
+import com.example.decorator.EmailServiceImplWithSignatureFunction;
 import com.example.delegate.Barman;
 import com.example.delegate.Cook;
 import com.example.delegate.Waiter;
@@ -84,10 +87,28 @@ public class Runner {
 
         //Delegate testing
         System.out.println("\n6. Delegate testing...");
+
+        /*
         Waiter waiter = new Waiter(); //создаём официанта
-        //waiter.setDishMaker(new Barman()); // официант передаёт заказ бармену и получает выпивку для посетителя
+        waiter.setDishMaker(new Barman()); // официант передаёт заказ бармену и получает выпивку для посетителя
+        waiter.provideDish(); // официант обеспечивает посетителя позицией из меню (в данном случае выпивкой)
+         */
+
+        Waiter waiter = new Waiter(); //создаём официанта
         waiter.setDishMaker(new Cook()); // официант передаёт заказ повару и получает еду для посетителя
-        waiter.provideDish(); // официант обеспечивает посетителя позицией из меню
+        waiter.provideDish(); // официант обеспечивает посетителя позицией из меню (в данном случае едой)
+
+        //Decorator testing
+        System.out.println("\n7. Decorator testing...");
+
+        /*
+        EmailService emailService = new EmailServiceImpl(); // создаём сервис электронной почты
+        emailService.sendLetter(); // отправляем письмо
+        */
+
+        EmailService emailService = new EmailServiceImpl(); // создаём сервис электронной почты
+        EmailService emailServiceNew = new EmailServiceImplWithSignatureFunction(emailService); // вызываем обёртку сервиса
+        emailServiceNew.sendLetter(); // отправляем письмо (теперь оно с добавленной подписью)
 
         System.out.println("\nFinish");
 
